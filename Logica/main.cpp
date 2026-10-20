@@ -3,7 +3,7 @@
 #include <string>
 #include "../Dominio/Hospital.h"
 using namespace std;
-void leerArchivo(Hospital* h) {
+void leerPacientes(Hospital* h) {
     ifstream arch("pacientes.txt");
     if (!arch.is_open()) {
         cerr<<"Error al abrir el archivo"<<endl;
@@ -12,10 +12,9 @@ void leerArchivo(Hospital* h) {
     string linea;
     while (getline(arch,linea)) {
         h->crearPaciente(linea);
-
     }
-
 }
+
 
 void menu(Hospital* h) {
     int opcion = 0;

@@ -17,10 +17,12 @@ public:
     Hospital();
 
     void agregarPaciente(Paciente* p);
-    bool existeServicio(const string& nombre);
-    void agregarServicioMedico(ServicioMedico* servicioMedico);
     bool existePaciente(const string& id);
     void crearPaciente(string linea);
+
+    void añadirServicioMedico(ServicioMedico * servicio);
+
+    void crearServicioMedico();
 
     void mostrarPacientes(); // ESTA FUNCION ES PARA MOSTRAR LOS PACIENTES Y SELECCIONAR CUANTOS QUIERE ATENDER
     ServicioMedico * buscarServicioMedico(const string & string);
