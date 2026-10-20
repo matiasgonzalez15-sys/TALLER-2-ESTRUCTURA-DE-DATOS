@@ -1,7 +1,6 @@
 #include "NodeServicios.h"
 #include "ServicioMedico.h"
 #include "ColaPacientes.h"
-#include "PilaHistorial.h"
 #include <iostream>
 #include <sstream>
 #include <string>

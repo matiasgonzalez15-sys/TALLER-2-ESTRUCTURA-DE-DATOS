@@ -9,9 +9,11 @@ add_executable(untitled1
         Dominio/NodeServicios.h
         Dominio/ServicioMedico.h
         Dominio/NodePacientes.h
-        Dominio/NodeHistorial.h
         Logica/main.cpp
         Logica/Hospital.cpp
         Dominio/ColaPacientes.h
         Logica/ColaPacientes.cpp
+        Dominio/ArbolDecision.h
+        Dominio/NodeDecision.h
+        Logica/ArbolDecision.cpp
 )
