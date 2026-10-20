@@ -14,6 +14,4 @@ add_executable(untitled1
         Logica/Hospital.cpp
         Dominio/ColaPacientes.h
         Logica/ColaPacientes.cpp
-        Dominio/PilaHistorial.h
-        Logica/PilaHistorial.cpp
 )

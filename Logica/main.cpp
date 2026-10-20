@@ -46,7 +46,6 @@ void menu(Hospital* h) {
             case 2:
                 break;
             case 3:
-                h->mostrarHistorial();
                 break;
             case 4:
                 cout << "Adios... :D" << endl;
@@ -60,7 +59,7 @@ void menu(Hospital* h) {
 
 int main() {
     Hospital* hospital = new Hospital();
-    leerArchivo(hospital);
+    leerPacientes(hospital);
     menu(hospital);
 
 

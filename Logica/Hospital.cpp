@@ -65,17 +65,17 @@ void Hospital::crearPaciente(string linea) { // creamos pacientes y se mandan a 
     stringstream ss(linea);
     string id, nombre, edadString, tempStr, presionStr, dolorStr, tipoDolor, traumaStr, sintNeuStr, cirugiaStr,
             diasHospStr;
-    getline(ss, id, ';');
-    getline(ss, nombre, ';');
-    getline(ss, edadString, ';');
-    getline(ss, tempStr, ';');
-    getline(ss, presionStr, ';');
-    getline(ss, dolorStr, ';');
-    getline(ss, tipoDolor, ';');
-    getline(ss, traumaStr, ';');
-    getline(ss, sintNeuStr, ';');
-    getline(ss, cirugiaStr, ';');
-    getline(ss, diasHospStr, ';');
+    getline(ss, id, '|');
+    getline(ss, nombre, '|');
+    getline(ss, edadString, '|');
+    getline(ss, tempStr, '|');
+    getline(ss, presionStr, '|');
+    getline(ss, dolorStr, '|');
+    getline(ss, tipoDolor, '|');
+    getline(ss, traumaStr, '|');
+    getline(ss, sintNeuStr, '|');
+    getline(ss, cirugiaStr, '|');
+    getline(ss, diasHospStr, '|');
 
     int edad = stoi(edadString);
     float temp = stof(tempStr);
@@ -99,8 +99,6 @@ void Hospital::atenderPacientes(int opcion) {
 
 }
 
-void Hospital::mostrarHistorial() {
-}
 
 Hospital::~Hospital() {
     NodeServicios* actualS= this-> servicios;
@@ -110,5 +108,4 @@ Hospital::~Hospital() {
         delete temp;
     }
     delete this -> filaEspera;
-    delete this -> historial;
 }

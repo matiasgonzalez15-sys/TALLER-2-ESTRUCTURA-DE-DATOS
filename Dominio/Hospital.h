@@ -11,7 +11,6 @@ class Hospital {
 private:
     NodeServicios* servicios;
     ColaPacientes* filaEspera;
-    PilaHistorial* historial;
     ServicioMedico* crearServicioMedico(const string& nombre);
 public:
     Hospital();
@@ -28,6 +27,5 @@ public:
     ServicioMedico * buscarServicioMedico(const string & string);
 
     void atenderPacientes(int opcion); // AQUI YA LOS ATENDEMOS
-    void mostrarHistorial();
     ~Hospital();
 };

@@ -32,6 +32,7 @@ public:
         this->temperatura = temperatura;
         this->presionArterial = presionArterial;
         this->dolor = dolor;
+        this -> tipoDolor = tipoDolor;
         this -> trauma = determinar(trauma);
         this -> sintomasNeurologicos = determinar(sintomasNeurologicos);
         this-> requiereCirugia = determinar(requiereCirugia);
