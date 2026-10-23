@@ -75,17 +75,18 @@ ArbolDecision::ArbolDecision() {
     this -> raiz = new NodeDecision("esPediatrico");
     raiz -> izq = new NodeDecision("Hospitalizacion");
     raiz -> izq -> izq = new NodeDecision("Hospitalacion", true);
+    raiz -> izq -> der = new NodeDecision("Pediatria", true);
 
     raiz -> der = new NodeDecision("Urgencia");
     raiz -> der -> izq = new NodeDecision("Urgencia", true);
     raiz -> der -> der = new NodeDecision("Cirugia");
     raiz -> der -> der -> izq = new NodeDecision("Cirugia", true);
     raiz -> der -> der -> der = new NodeDecision("Cardiologico");
-    raiz -> der -> der -> der -> izq = new NodeDecision("Cardiologico", true);
+    raiz -> der -> der -> der -> izq = new NodeDecision("Cardiologia", true);
     raiz -> der -> der -> der -> der = new NodeDecision("Trauma");
     raiz -> der -> der -> der -> der -> izq = new NodeDecision("Trauma", true);
     raiz -> der -> der -> der -> der -> der = new NodeDecision("Neurologico");
-    raiz -> der -> der -> der -> der -> der -> izq = new NodeDecision("Neurologico", true);
+    raiz -> der -> der -> der -> der -> der -> izq = new NodeDecision("Neurologia", true);
     raiz -> der -> der -> der -> der -> der -> der = new NodeDecision("MedicinaGeneral", true);
 }
 string ArbolDecision::determinarServicio(Paciente *p) {
