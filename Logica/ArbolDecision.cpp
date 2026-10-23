@@ -84,7 +84,7 @@ ArbolDecision::ArbolDecision() {
     raiz -> der -> der -> der = new NodeDecision("Cardiologico");
     raiz -> der -> der -> der -> izq = new NodeDecision("Cardiologia", true);
     raiz -> der -> der -> der -> der = new NodeDecision("Trauma");
-    raiz -> der -> der -> der -> der -> izq = new NodeDecision("Trauma", true);
+    raiz -> der -> der -> der -> der -> izq = new NodeDecision("Traumatologia", true);
     raiz -> der -> der -> der -> der -> der = new NodeDecision("Neurologico");
     raiz -> der -> der -> der -> der -> der -> izq = new NodeDecision("Neurologia", true);
     raiz -> der -> der -> der -> der -> der -> der = new NodeDecision("MedicinaGeneral", true);
