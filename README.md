@@ -17,13 +17,21 @@ El sistema considera los siguientes servicios:
 **Árboles AVL:** cada servicio cuenta con un árbol AVL para almacenar y administrar sus pacientes. Se consideran operaciones de inserción, búsqueda, eliminación, recorridos y balanceo.
 ## Criterios de clasificación
 El árbol de decisión utiliza los datos de cada paciente para determinar su derivación. Las reglas se evalúan según el orden definido en la implementación:
-1. Los pacientes menores de 14 años se derivan a Pediatría.
-2. Los pacientes con traumatismos se derivan a Cirugía si requieren una operación; de lo contrario, a Traumatología.
-3. Los pacientes con síntomas neurológicos se derivan a Neurología.
-4. Los pacientes con dolor de pecho se derivan a Cardiología.
-5. Los pacientes con temperatura igual o superior a 38,5 °C o nivel de dolor igual o superior a 8 se derivan a Urgencias.
-6. Los pacientes que requieren dos o más días de hospitalización se derivan a Hospitalización.
-7. Si no se cumple ninguna de las condiciones anteriores, el paciente se deriva a Medicina General.
+[¿Es paciente pediátrico?  Edad < 15]
+ ├─ Sí: [¿Requiere hospitalización?  DiasHospitalizacion > 0]
+ │       ├─ Sí → HOSPITALIZACIÓN
+ │       └─ No → PEDIATRÍA
+ └─ No: [¿Urgencia vital?  Dolor >= 9  o  Temperatura >= 39.5]
+         ├─ Sí → URGENCIA
+         └─ No: [¿Requiere cirugía?  RequiereCirugia == 1]
+                 ├─ Sí → CIRUGÍA
+                 └─ No: [¿Caso cardiológico?  TipoDolor == pecho  o  Presión > 140]
+                         ├─ Sí → CARDIOLOGÍA
+                         └─ No: [¿Es trauma?  Trauma == 1]
+                                 ├─ Sí → TRAUMATOLOGÍA
+                                 └─ No: [¿Síntomas neurológicos?  SintomasNeurologicos == 1]
+                                         ├─ Sí → NEUROLOGÍA
+                                         └─ No → MEDICINA GENERAL
 ## Archivo de pacientes
 Los pacientes se cargan desde `pacientes.txt`, que contiene los datos necesarios para realizar la clasificación. Cada registro incluye ID, nombre, edad, temperatura, presión arterial, nivel de dolor, tipo de dolor, traumatismo, síntomas neurológicos, requerimiento de cirugía y días de hospitalización. Los campos están separados por el delimitador utilizado por el programa, por lo que se debe respetar el formato establecido para la lectura de los datos.
 ## Compilación y ejecución
