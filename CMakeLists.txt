@@ -4,6 +4,10 @@ project(untitled1)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(untitled1
+
+        Dominio/ArbolAVL.h
+        Dominio/NodoAVL.h
+        Logica/ArbolDecision.cpp
         Dominio/Paciente.h
         Dominio/Hospital.h
         Dominio/NodeServicios.h
@@ -16,4 +20,5 @@ add_executable(untitled1
         Dominio/ArbolDecision.h
         Dominio/NodeDecision.h
         Logica/ArbolDecision.cpp
+        Logica/ArbolAVL.cpp
 )
