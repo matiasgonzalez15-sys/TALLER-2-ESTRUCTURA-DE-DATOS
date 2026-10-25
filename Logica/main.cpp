@@ -3,16 +3,19 @@
 #include <string>
 #include "../Dominio/Hospital.h"
 using namespace std;
-void leerPacientes(Hospital* h) {
+bool leerPacientes(Hospital* h) {
     ifstream arch("pacientes.txt");
     if (!arch.is_open()) {
         cerr<<"Error al abrir el archivo"<<endl;
-        return;
+        return false;
     }
     string linea;
+    int cargados = 0;
     while (getline(arch,linea)) {
-        h->crearPaciente(linea);
+        if(h->crearPacientes(linea)) cargados++;
     }
+    cout << "Cargados en total: "<< cargados << endl;
+    return true;
 }
 
 
@@ -33,23 +36,28 @@ void menu(Hospital* h) {
         }
         switch (opcion) {
             case 1:
-                int opcion;
+                int cantidad;
                 
                 cout << "Cuantos pacientes quiere atender: ";
-                cin >> opcion;
+                cin >> cantidad;
                 if (cin.fail()) {
                     cout<<"Opcion incorrecta"<<endl;
                     cin.clear();
                     cin.ignore(1000, '\n');
                 }
-                h->atenderPacientes(opcion);
+                h->atenderPacientes(cantidad);
                 break;
             case 2:
                 cin.ignore(1000, '\n');
                 h->menuAVL();
                 break;
             case 3:
-                h->buscarPaciente(id);
+                cin.ignore(1000, '\n');
+                cout << "Indique el ID del paciente: ";
+                getline(cin, id);
+                if(!id.empty()){
+                    h->buscarPaciente(id);   
+                }
                 break;
             case 4:
                 cout << "Adios... :D" << endl;
@@ -63,8 +71,10 @@ void menu(Hospital* h) {
 
 int main() {
     Hospital* hospital = new Hospital();
-    leerPacientes(hospital);
-    menu(hospital);
+    if(leerPacientes(hospital)){
+        menu(hospital);
+    }
+    
 
 
     delete hospital;
