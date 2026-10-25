@@ -59,12 +59,6 @@ bool ColaPacientes::existe(const string &id) {
     return false;
 }
 
-NodePacientes *ColaPacientes::getPacientes() {
-    if (this-> cabeza == nullptr) return nullptr;
-    return this-> cabeza;
-}
-
-
 ColaPacientes::~ColaPacientes() {
     clear();
 }
