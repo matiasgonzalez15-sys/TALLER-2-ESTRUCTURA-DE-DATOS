@@ -8,73 +8,12 @@ void ArbolDecision::liberarArbol(NodeDecision* nodo) {
     liberarArbol(nodo -> der);
     delete nodo;
 }
-string ArbolDecision::evaluar(NodeDecision* nodo, Paciente* p) {
-    if (!nodo) return "MedicinaGeneral";
-    if (nodo -> esHoja) return nodo -> preguntaOServicio;
 
-    if (nodo->preguntaOServicio == "esPediatrico") {
-        if (p->getEdad() < 15) {
-            return evaluar(nodo -> izq, p);
-        }
-        else {
-            return evaluar(nodo -> der, p);
-        }
-    }
-    else if (nodo -> preguntaOServicio == "Hospitalizacion") {
-        if (p -> getCantDiasHospitalizacion() > 0) {
-            return evaluar(nodo -> izq, p);
-        }
-        else {
-            return evaluar(nodo -> der, p);
-        }
-    }
-    else if (nodo -> preguntaOServicio == "Urgencia") {
-        if (p-> getDolor() >= 9 || p -> getDolor() > 39.5) {
-            return evaluar(nodo -> izq, p);
-        }
-        else {
-            return evaluar(nodo -> der, p);
-        }
-    }
-    else if (nodo -> preguntaOServicio == "Cirugia") {
-        if (p -> getRequiereCirugia()) {
-            return evaluar(nodo -> izq, p);
-        }
-        else {
-            return evaluar(nodo -> der, p);
-        }
-    }
-    else if (nodo -> preguntaOServicio == "Cardiologico") {
-        if (p -> getTipoDolor() == "pecho" || p -> getPresionArterial() > 140) {
-            return evaluar(nodo -> izq, p);
-        }
-        else {
-            return evaluar(nodo -> der, p);
-        }
-    }
-    else if (nodo -> preguntaOServicio == "Trauma") {
-        if (p->getTrauma()) {
-            return evaluar(nodo -> izq, p);
-        }
-        else {
-            return evaluar(nodo -> der, p);
-        }
-    }
-    else if (nodo -> preguntaOServicio == "Neurologico") {
-        if (p -> getSintomasNeurologicos()) {
-            return evaluar(nodo -> izq, p);
-        }
-        else {
-            return evaluar(nodo -> der, p);
-        }
-    }
-    return "MedicinaGeneral";
-}
 
 ArbolDecision::ArbolDecision() {
     this -> raiz = new NodeDecision("esPediatrico");
     raiz -> izq = new NodeDecision("Hospitalizacion");
-    raiz -> izq -> izq = new NodeDecision("Hospitalacion", true);
+    raiz -> izq -> izq = new NodeDecision("Hospitalizacion", true);
     raiz -> izq -> der = new NodeDecision("Pediatria", true);
 
     raiz -> der = new NodeDecision("Urgencia");
@@ -89,7 +28,71 @@ ArbolDecision::ArbolDecision() {
     raiz -> der -> der -> der -> der -> der -> izq = new NodeDecision("Neurologia", true);
     raiz -> der -> der -> der -> der -> der -> der = new NodeDecision("MedicinaGeneral", true);
 }
-string ArbolDecision::determinarServicio(Paciente *p) {
-    return evaluar(raiz, p);
+
+
+void ArbolDecision::agregarPaso(string& ruta, const string& paso) {
+    if (!ruta.empty()) ruta += " -> ";
+    ruta += paso;
 }
 
+string ArbolDecision::evaluar(NodeDecision* nodo, Paciente* p, string& ruta) {
+    if (!nodo) return "MedicinaGeneral";
+    if (nodo->esHoja) return nodo->preguntaOServicio;
+
+    bool cumple = false;
+    string textoSi, textoNo;
+    const string& q = nodo->preguntaOServicio;
+
+    if (q == "esPediatrico") {
+        cumple = p->getEdad() < 15;
+        textoSi = "Edad < 15";
+        textoNo = "Edad >= 15";
+    }
+    else if (q == "Hospitalizacion") {
+        cumple = p->getCantDiasHospitalizacion() > 0;
+        textoSi = "DiasHospitalizacion > 0";
+        textoNo = "DiasHospitalizacion == 0";
+    }
+    else if (q == "Urgencia") {
+        cumple = p->getDolor() >= 9 || p->getTemperatura() >= 39.5;
+        textoSi = "Dolor >= 9 o Temperatura >= 39.5";
+        textoNo = "Dolor < 9 y Temperatura < 39.5";
+    }
+    else if (q == "Cirugia") {
+        cumple = p->getRequiereCirugia();
+        textoSi = "RequiereCirugia == 1";
+        textoNo = "RequiereCirugia == 0";
+    }
+    else if (q == "Cardiologico") {
+        cumple = p->getTipoDolor() == "pecho" || p->getPresionArterial() > 140;
+        textoSi = "TipoDolor == pecho o Presion > 140";
+        textoNo = "TipoDolor != pecho y Presion <= 140";
+    }
+    else if (q == "Trauma") {
+        cumple = p->getTrauma();
+        textoSi = "Trauma == 1";
+        textoNo = "Trauma == 0";
+    }
+    else if (q == "Neurologico") {
+        cumple = p->getSintomasNeurologicos();
+        textoSi = "SintomasNeurologicos == 1";
+        textoNo = "SintomasNeurologicos == 0";
+    }
+    else {
+        agregarPaso(ruta, "Nodo desconocido (" + q + ")");
+        return "MedicinaGeneral";
+    }
+
+    agregarPaso(ruta, cumple ? textoSi : textoNo);
+    return evaluar(cumple ? nodo->izq : nodo->der, p, ruta);
+}
+
+string ArbolDecision::determinarServicio(Paciente* p, string& ruta) {
+    ruta.clear();
+    return evaluar(raiz, p, ruta);
+}
+
+
+ArbolDecision::~ArbolDecision() {
+    liberarArbol(raiz);
+}
