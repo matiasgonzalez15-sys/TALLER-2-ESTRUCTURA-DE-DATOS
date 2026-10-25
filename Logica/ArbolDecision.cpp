@@ -82,15 +82,60 @@ string ArbolDecision::evaluar(NodeDecision* nodo, Paciente* p, string& ruta) {
         agregarPaso(ruta, "Nodo desconocido (" + q + ")");
         return "MedicinaGeneral";
     }
+    if(cumple){
+        agregarPaso(ruta,textoSi);
+    }
+    else{
+        agregarPaso(ruta,textoNo);
+    }
 
-    agregarPaso(ruta, cumple ? textoSi : textoNo);
     return evaluar(cumple ? nodo->izq : nodo->der, p, ruta);
 }
 
 string ArbolDecision::determinarServicio(Paciente* p, string& ruta) {
     ruta.clear();
+    if(p == nullptr){
+        ruta = "Datos insuficientes";
+        return "MedicinaGeneral";
+    }
     return evaluar(raiz, p, ruta);
 }
+void ArbolDecision::inordenRec(NodeDecision* n) {
+    if (!n) return;
+    inordenRec(n->izq);
+    if(n->esHoja){
+          cout << "Servicio: "<< n->preguntaOServicio << endl;
+    }
+    else{
+          cout <<  "Pregunta: " << n->preguntaOServicio << endl;
+    }
+    inordenRec(n->der);
+}
+void ArbolDecision::preordenRec(NodeDecision* n) {
+    if (!n) return;
+    if(n->esHoja){
+          cout << "Servicio: "<< n->preguntaOServicio << endl;
+    }
+    else{
+          cout <<  "Pregunta: " << n->preguntaOServicio << endl;
+    }
+    inordenRec(n->izq);
+    inordenRec(n->der);
+}
+void ArbolDecision::postordenRec(NodeDecision* n) {
+    if (!n) return;
+    inordenRec(n->izq);
+    inordenRec(n->der);
+    if(n->esHoja){
+          cout << "Servicio: "<< n->preguntaOServicio << endl;
+    }
+    else{
+          cout <<  "Pregunta: " << n->preguntaOServicio << endl;
+    }
+}
+void ArbolDecision::mostrarPreorden()  { cout << "\n--- Arbol de decision: PREORDEN ---" << endl;  preordenRec(raiz); }
+void ArbolDecision::mostrarInorden()   { cout << "\n--- Arbol de decision: INORDEN ---" << endl;   inordenRec(raiz); }
+void ArbolDecision::mostrarPostorden() { cout << "\n--- Arbol de decision: POSTORDEN ---" << endl; postordenRec(raiz); }
 
 
 ArbolDecision::~ArbolDecision() {
