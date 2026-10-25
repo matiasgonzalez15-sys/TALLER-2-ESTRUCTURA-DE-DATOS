@@ -307,3 +307,17 @@ void ArbolAVL::mostrarBalances() const {
     cout << "Altura del arbol: " << altura() << endl;
     balancesRec(raiz);
 }
+
+
+void ArbolAVL::dibujarRec(NodoAVL* n, int nivel) {
+    if (n == nullptr) return;
+    dibujarRec(n->der, nivel + 1);
+    cout << string(nivel * 8, ' ') << n->paciente->getId()
+         << " [h=" << n->altura << ", fb=" << balanceNodo(n) << "]" << endl;
+    dibujarRec(n->izq, nivel + 1);
+}
+
+void ArbolAVL::mostrarArbol() const {
+    if (raiz == nullptr) { cout << "Sin pacientes" << endl; return; }
+    dibujarRec(raiz, 0);
+}
