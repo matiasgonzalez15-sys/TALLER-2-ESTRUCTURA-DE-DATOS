@@ -1,59 +1,65 @@
 #include "NodePacientes.h"
+#include "ArbolAVL.h"
+#include <iostream>
 #pragma once
+
 class ServicioMedico {
 protected:
     string nombre;
-    NodePacientes* pacientes;
+     ArbolAVL* arbolPacientes;
 public:
+
     ServicioMedico(string nombre) {
         this->nombre = nombre;
-        this->pacientes = nullptr;
+        this->arbolPacientes = new ArbolAVL();
     };
     string getNombre() const{
         return this->nombre;
     }
-    
     virtual ~ServicioMedico() {
-        NodePacientes* cursor = this->pacientes;
-        while (cursor != nullptr) {
-            NodePacientes* temp = cursor;
-            cursor = cursor->getNext();
-            delete temp;
-        }
+        delete arbolPacientes;
     }
-     void mostrarPacientes() const {
-         // pacientes
-     }
-    bool existePaciente(const string& id) const { // COMPROBAMOS SI EL PACIENTE EXISTE EN EL SERVICIO CORRESPONDIENTE
-        NodePacientes* cursor = this-> pacientes;
-        while (cursor != nullptr) {
-            if (cursor -> getPaciente() != nullptr && cursor->getPaciente()-> getId() == id) {
-                return true;
-            }
-            cursor = cursor->getNext();
-        }
-        return false;
 
+    Paciente* buscarPorId(const string& id, string* ruta = nullptr) const {
+        return arbolPacientes->buscarPorId(id, ruta);
     }
-    virtual void agregarPaciente(Paciente * p) { // AQUI YA SE DERIVA EL PACIENTE AL SERVICIO
-        if (p == nullptr) return;
-        if (existePaciente(p->getId())) {
-            cout << "El paciente " << p->getId() << " ya se encuentra como paciente" << endl;
-            return;
-        }
-        NodePacientes* nuevo = new NodePacientes(p);
-        if (this-> pacientes == nullptr) {
-            this-> pacientes = nuevo;
-        }
-        else {
-            NodePacientes* cursor = this-> pacientes;
-            while (cursor->getNext() != nullptr) {
-                cursor = cursor -> getNext();
-            }
-            cursor -> setNext(nuevo);
-        }
 
+    Paciente* buscarPorNombre(const string& nombre, string* ruta = nullptr) const {
+        return arbolPacientes->buscarPorNombre(nombre, ruta);
+    }
 
+    bool eliminarPaciente(const string& id) {
+        return arbolPacientes->eliminar(id);
+    }
+    int total() const { return arbolPacientes->total(); }
+    int altura() const { return arbolPacientes->altura(); }
+
+    void mostrarTodoAVL() const {
+        cout << "Total de pacientes: " << arbolPacientes->total() << endl;
+        cout << "Altura del arbol: " << arbolPacientes->altura() << endl;
+        cout << "Inorden:    "; arbolPacientes->mostrarInorden();
+        cout << "Preorden:   "; arbolPacientes->mostrarPreorden();
+        cout << "Postorden:  "; arbolPacientes->mostrarPostorden();
+        cout << "\nFactores de balance:" << endl;
+        arbolPacientes->mostrarBalances();
+        cout << "\nForma del arbol (raiz a la izquierda):" << endl;
+        arbolPacientes->mostrarArbol();
+    }
+    void mostrarPacientes() const {
+        arbolPacientes->mostrarInorden();
+    }
+
+    virtual bool agregarPaciente(Paciente* p) {
+        if (p == nullptr) {
+            cout << "ERROR: paciente nulo" << endl;
+            return false;
+        }
+        if (arbolPacientes == nullptr) {
+            cout << "ERROR: el arbol de pacientes es nulo" << endl;
+            return false;
+        }
+        bool resultado = arbolPacientes->insertar(p);
+        return resultado;
     }
 };
 class Urgencia : public ServicioMedico {
@@ -63,7 +69,7 @@ public:
 
 class MedicinaGeneral : public ServicioMedico {
 public:
-    MedicinaGeneral() : ServicioMedico("Medicina General") {};
+    MedicinaGeneral() : ServicioMedico("MedicinaGeneral") {};
 };
 
 class Cardiologia : public ServicioMedico {
