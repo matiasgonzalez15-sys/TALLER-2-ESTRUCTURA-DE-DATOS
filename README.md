@@ -15,23 +15,22 @@ El sistema considera los siguientes servicios:
 **Cola de pacientes:** permite procesar a los pacientes respetando el orden de llegada mediante el criterio FIFO.
 **Árbol de decisión:** evalúa los atributos de cada paciente para determinar el servicio médico al que será derivado.
 **Árboles AVL:** cada servicio cuenta con un árbol AVL para almacenar y administrar sus pacientes. Se consideran operaciones de inserción, búsqueda, eliminación, recorridos y balanceo.
-## Criterios de clasificación
-El árbol de decisión utiliza los datos de cada paciente para determinar su derivación. Las reglas se evalúan según el orden definido en la implementación:
-[¿Es paciente pediátrico?  Edad < 15]
- ├─ Sí: [¿Requiere hospitalización?  DiasHospitalizacion > 0]
- │       ├─ Sí → HOSPITALIZACIÓN
- │       └─ No → PEDIATRÍA
- └─ No: [¿Urgencia vital?  Dolor >= 9  o  Temperatura >= 39.5]
-         ├─ Sí → URGENCIA
-         └─ No: [¿Requiere cirugía?  RequiereCirugia == 1]
-                 ├─ Sí → CIRUGÍA
-                 └─ No: [¿Caso cardiológico?  TipoDolor == pecho  o  Presión > 140]
-                         ├─ Sí → CARDIOLOGÍA
-                         └─ No: [¿Es trauma?  Trauma == 1]
-                                 ├─ Sí → TRAUMATOLOGÍA
-                                 └─ No: [¿Síntomas neurológicos?  SintomasNeurologicos == 1]
-                                         ├─ Sí → NEUROLOGÍA
-                                         └─ No → MEDICINA GENERAL
+## Árbol de decisión
+
+El árbol de decisión es un árbol binario implementado manualmente con nodos y punteros. Cada nodo interno contiene una pregunta sobre un atributo del paciente: si la respuesta es afirmativa se continúa por el hijo izquierdo, y si es negativa por el hijo derecho. Las hojas del árbol corresponden a los ocho servicios del hospital, y la ruta seguida por cada paciente se muestra por pantalla al atenderlo.
+
+La evaluación comienza en la raíz con la pregunta de si el paciente es pediátrico, es decir, si su edad es menor a 15 años. Elegimos este atributo como raíz porque es el filtro más general: los menores de edad se atienden en servicios distintos a los de los adultos. Si el paciente es pediátrico, se revisan los días de hospitalización estimados: si son mayores a 0 el paciente se deriva a Hospitalización, y si no, a Pediatría.
+
+Si el paciente tiene 15 años o más, se evalúa primero si presenta una urgencia vital, que definimos como un dolor mayor o igual a 9 o una temperatura mayor o igual a 39.5. Esta pregunta va antes que cualquier especialidad porque una urgencia debe atenderse de inmediato, y en ese caso el paciente se deriva a Urgencia. Si no hay urgencia, se revisa si requiere cirugía, caso en el que se deriva a Cirugía. Luego se evalúa si es un caso cardiológico, lo que ocurre cuando el tipo de dolor es de pecho o la presión arterial es mayor a 140, y en ese caso va a Cardiología. Después se revisa si el paciente presenta trauma, y de ser así se deriva a Traumatología. Finalmente se evalúa si tiene síntomas neurológicos, que lo derivan a Neurología, y si no cumple ninguna de las condiciones anteriores se asigna a Medicina General, que cumple el rol de servicio de atención inicial.
+
+En total el árbol utiliza nueve atributos del paciente (edad, días de hospitalización, dolor, temperatura, requiere cirugía, tipo de dolor, presión arterial, trauma y síntomas neurológicos), por lo que supera el mínimo de cuatro exigido, y existe al menos una ruta válida hacia cada uno de los ocho servicios.
+
+Los casos límite están definidos de forma exacta. Una edad de 15 años ya se considera adulta, un dolor de 9 o una temperatura de 39.5 ya se consideran urgencia, y una presión de 140 exactos no se considera cardiológica, ya que se exige que sea mayor. Cuando un paciente cumple varias condiciones a la vez, se respeta el orden del árbol y se toma la primera que se cumple, de modo que, por ejemplo, un paciente con dolor de pecho y dolor 9 es derivado a Urgencia y no a Cardiología.
+
+Los datos inválidos se controlan al leer el archivo. Si una línea tiene campos faltantes, valores no numéricos donde corresponde, valores fuera de rango, un tipo de dolor desconocido o un ID repetido, la línea se rechaza, se informa el error por pantalla y el programa continúa con las demás líneas. Las líneas en blanco se ignoran. Si el árbol recibe un paciente nulo, es decir, con datos insuficientes, el paciente se deriva a Medicina General por ser el servicio de evaluación inicial.
+
+El árbol de decisión puede recorrerse en preorden, inorden y postorden desde el menú, en la opción Ver departamentos y luego la opción de recorridos del árbol de decisión.
+
 ## Archivo de pacientes
 Los pacientes se cargan desde `pacientes.txt`, que contiene los datos necesarios para realizar la clasificación. Cada registro incluye ID, nombre, edad, temperatura, presión arterial, nivel de dolor, tipo de dolor, traumatismo, síntomas neurológicos, requerimiento de cirugía y días de hospitalización. Los campos están separados por el delimitador utilizado por el programa, por lo que se debe respetar el formato establecido para la lectura de los datos.
 ## Compilación y ejecución
