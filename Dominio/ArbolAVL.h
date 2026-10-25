@@ -5,6 +5,7 @@ using namespace std;
 
 class ArbolAVL {
 private:
+    static void dibujarRec(NodoAVL* n, int nivel);
     NodoAVL* raiz;
     int cantidad;
 
@@ -57,4 +58,5 @@ public:
     void mostrarPostorden() const;
 
     void mostrarBalances() const;
+    void mostrarArbol() const;
 };
