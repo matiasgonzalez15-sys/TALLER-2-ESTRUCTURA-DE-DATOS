@@ -1,3 +1,6 @@
+#pragma once
+#include "ArbolDecision.h"
+#include "Paciente.h"
 #include "NodeServicios.h"
 #include "ServicioMedico.h"
 #include "ColaPacientes.h"
@@ -10,20 +13,24 @@ class Hospital {
 private:
     NodeServicios* servicios;
     ColaPacientes* filaEspera;
-    ServicioMedico* crearServicioMedico(const string& nombre);
+    ArbolDecision* arbol;
 public:
     Hospital();
-
+    ServicioMedico* buscarServicioMedico(const string& nombre);
     void agregarPaciente(Paciente* p);
     bool existePaciente(const string& id);
     void crearPaciente(string linea);
-
     void añadirServicioMedico(ServicioMedico * servicio);
-
     void crearServicioMedico();
+    void verDepartamento();
+    void BuscarPorId(const string& id);
 
-    void mostrarPacientes(); // ESTA FUNCION ES PARA MOSTRAR LOS PACIENTES Y SELECCIONAR CUANTOS QUIERE ATENDER
-    ServicioMedico * buscarServicioMedico(const string & string);
+
+    void menuAVL();
+    void buscarPaciente(const string& entrada);
+    ServicioMedico* elegirServicio();
+
+
 
     void atenderPacientes(int opcion); // AQUI YA LOS ATENDEMOS
     ~Hospital();
