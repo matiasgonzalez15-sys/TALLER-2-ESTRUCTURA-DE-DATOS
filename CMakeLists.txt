@@ -1,24 +1,15 @@
-cmake_minimum_required(VERSION 4.3)
-project(untitled1)
+  cmake_minimum_required(VERSION 3.10)
+   project(HospitalTaller2)
 
-set(CMAKE_CXX_STANDARD 20)
+   set(CMAKE_CXX_STANDARD 17)
+   set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(untitled1
+   add_executable(hospital
+           Logica/main.cpp
+           Logica/Hospital.cpp
+           Logica/ColaPacientes.cpp
+           Logica/ArbolDecision.cpp
+           Logica/ArbolAVL.cpp
+   )
 
-        Dominio/ArbolAVL.h
-        Dominio/NodoAVL.h
-        Logica/ArbolDecision.cpp
-        Dominio/Paciente.h
-        Dominio/Hospital.h
-        Dominio/NodeServicios.h
-        Dominio/ServicioMedico.h
-        Dominio/NodePacientes.h
-        Logica/main.cpp
-        Logica/Hospital.cpp
-        Dominio/ColaPacientes.h
-        Logica/ColaPacientes.cpp
-        Dominio/ArbolDecision.h
-        Dominio/NodeDecision.h
-        Logica/ArbolDecision.cpp
-        Logica/ArbolAVL.cpp
-)
+   configure_file(${CMAKE_SOURCE_DIR}/pacientes.txt ${CMAKE_BINARY_DIR}/pacientes.txt COPYONLY)
