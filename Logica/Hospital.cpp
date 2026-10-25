@@ -66,13 +66,13 @@ bool Hospital::existePaciente(const string &id) { // verificamos si el paciente 
 bool Hospital::crearPaciente(string linea) { // creamos pacientes y se mandan a la fila de espera
     if(linea.empty()) return false;
     stringstream ss(linea);
-    string id, nombre, edadString, tempStr, presionStr, dolorStr, tipoDolor, traumaStr, sintNeuStr, cirugiaStr,
+    string id, nombre, edadStr, tempStr, presionStr, dolorStr, tipoDolor, traumaStr, sintNeuStr, cirugiaStr,
             diasHospStr;
 
     if (!getline(ss, id, ';') || !getline(ss, nombre, ';') || !getline(ss, edadStr, ';') ||
         !getline(ss, tempStr, ';') || !getline(ss, presionStr, ';') || !getline(ss, dolorStr, ';') ||
         !getline(ss, tipoDolor, ';') || !getline(ss, traumaStr, ';') || !getline(ss, sintNeuStr, ';') ||
-        !getline(ss, cirugiaStr, ';') || !getline(ss, diasStr, ';')) {
+        !getline(ss, cirugiaStr, ';') || !getline(ss, diasHospStr, ';')) {
         cerr << "Linea invalida porque faltan atributos" << linea << endl;
         return false;
     }
@@ -82,7 +82,7 @@ bool Hospital::crearPaciente(string linea) { // creamos pacientes y se mandan a 
         float temp = stof(tempStr);
         float presion = stof(presionStr);
         float dolor = stof(dolorStr);
-        int dias = stoi(diasStr);    
+        int dias = stoi(diasHospStr);    
         if (edad < 0 || edad > 120) throw invalid_argument("Edad fuera de rango (0-120)");
         if (temp < 30 || temp > 45) throw invalid_argument("Temperatura fuera de rango (30-45)");
         if (presion <= 0 || presion > 300) throw invalid_argument("Presion fuera de rango (1-300)");
@@ -307,4 +307,3 @@ Hospital::~Hospital() {
     delete this -> filaEspera;
     delete this -> arbol;
 }
-

@@ -12,7 +12,7 @@ bool leerPacientes(Hospital* h) {
     string linea;
     int cargados = 0;
     while (getline(arch,linea)) {
-        if(h->crearPacientes(linea)) cargados++;
+        if(h->crearPaciente(linea)) cargados++;
     }
     cout << "Cargados en total: "<< cargados << endl;
     return true;
