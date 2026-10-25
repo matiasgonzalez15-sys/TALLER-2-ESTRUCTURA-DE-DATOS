@@ -1,3 +1,4 @@
+#pragma once
 #include "NodePacientes.h"
 #include <string>
 using namespace std;
