@@ -32,7 +32,12 @@ Los datos inválidos se controlan al leer el archivo. Si una línea tiene campos
 El árbol de decisión puede recorrerse en preorden, inorden y postorden desde el menú, en la opción Ver departamentos y luego la opción de recorridos del árbol de decisión.
 
 ## Archivo de pacientes
-Los pacientes se cargan desde `pacientes.txt`, que contiene los datos necesarios para realizar la clasificación. Cada registro incluye ID, nombre, edad, temperatura, presión arterial, nivel de dolor, tipo de dolor, traumatismo, síntomas neurológicos, requerimiento de cirugía y días de hospitalización. Los campos están separados por el delimitador utilizado por el programa, por lo que se debe respetar el formato establecido para la lectura de los datos.
+Los pacientes se cargan desde `pacientes.txt`, que contiene los datos necesarios para realizar la clasificación. Cada registro incluye ID, nombre, edad, temperatura, presión arterial, nivel de dolor, tipo de dolor, traumatismo, síntomas neurológicos, requerimiento de cirugía y días de hospitalización.
+Los campos están separados por punto y coma (`;`), un paciente por línea, con este formato:
+
+`ID;Nombre;Edad;Temperatura;PresionArterial;Dolor;TipoDolor;Trauma;SintomasNeurologicos;RequiereCirugia;DiasHospitalizacion`
+
+Ejemplo: `001;Juan Perez;25;37.0;120;3;otro;0;0;0;1`
 ## Compilación y ejecución
 
 ### Requisitos
@@ -62,13 +67,13 @@ cmake --build build
 ```
 
 Después, ejecutar el archivo generado dentro de la carpeta `build`.
+
 También se puede compilar directamente con g++, desde la carpeta principal del proyecto:
 
 ```bash
 g++ -std=c++17 -Wall -o hospital Logica/*.cpp
 ./hospital
 ```
-Después, ejecutar el archivo generado dentro de la carpeta `build`.
 
 ### Archivo de entrada
 El programa utiliza `pacientes.txt` para cargar los pacientes. Asegurarse de que el archivo se encuentre en la ruta desde la cual el programa espera leerlo antes de ejecutar el sistema.
