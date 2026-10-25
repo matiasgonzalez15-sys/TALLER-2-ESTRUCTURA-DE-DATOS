@@ -5,3 +5,8 @@
 005;Pedro Soto;22;36.9;120;8;extremidad;1;0;1;5
 006;Sofia Morales;50;37.5;130;4;abdomen;1;0;0;4
 007;Luis Rojas;60;36.8;125;1;otro;0;0;0;5
+008;Rosa Diaz;10;36.7;110;2;otro;0;0;0;3
+009;Mario Vega;55;37.0;150;4;pecho;0;0;0;0
+010;Elena Paz;40;37.0;120;5;cabeza;0;1;0;0
+011;Paula Mena;35;36.8;118;2;otro;0;0;0;0
+012;Jorge Silva;28;37.1;122;3;abdomen;0;0;0;0
