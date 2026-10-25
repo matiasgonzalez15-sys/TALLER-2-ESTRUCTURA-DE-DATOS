@@ -27,10 +27,37 @@ El árbol de decisión utiliza los datos de cada paciente para determinar su der
 ## Archivo de pacientes
 Los pacientes se cargan desde `pacientes.txt`, que contiene los datos necesarios para realizar la clasificación. Cada registro incluye ID, nombre, edad, temperatura, presión arterial, nivel de dolor, tipo de dolor, traumatismo, síntomas neurológicos, requerimiento de cirugía y días de hospitalización. Los campos están separados por el delimitador utilizado por el programa, por lo que se debe respetar el formato establecido para la lectura de los datos.
 ## Compilación y ejecución
+
 ### Requisitos
-- Compilador de C++.
+- Compilador de C++ compatible con el estándar utilizado por el proyecto.
 - CMake.
-- Visual Studio Code, CLion o un entorno compatible.
+- Git (opcional, para clonar el repositorio).
+
+### Windows (VS Code)
+1. Instalar un compilador de C++, por ejemplo GCC mediante MSYS2.
+2. Instalar CMake y agregarlo al `PATH` si es necesario.
+3. Abrir una terminal en la carpeta principal del proyecto, donde se encuentra `CMakeLists.txt`.
+4. Ejecutar los siguientes comandos:
+
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+5. Ejecutar el archivo `.exe` generado dentro de la carpeta `build`. Su ubicación depende de la configuración de CMake.
+
+### Linux
+Desde la carpeta principal del proyecto, ejecutar:
+
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+Después, ejecutar el archivo generado dentro de la carpeta `build`.
+
+### Archivo de entrada
+El programa utiliza `pacientes.txt` para cargar los pacientes. Asegurarse de que el archivo se encuentre en la ruta desde la cual el programa espera leerlo antes de ejecutar el sistema.
 ### Compilar con CMake
 Desde la carpeta principal del proyecto, ejecutar:
 ```bash
