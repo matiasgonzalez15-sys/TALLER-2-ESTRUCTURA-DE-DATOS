@@ -63,6 +63,15 @@ cmake --build build
 
 Después, ejecutar el archivo generado dentro de la carpeta `build`.
 
+También se puede compilar directamente con g++, desde la carpeta principal del proyecto:
+
+```bash
+g++ -std=c++17 -Wall -o hospital Logica/*.cpp
+./hospital
+```
+
+Después, ejecutar el archivo generado dentro de la carpeta `build`.
+
 ### Archivo de entrada
 El programa utiliza `pacientes.txt` para cargar los pacientes. Asegurarse de que el archivo se encuentre en la ruta desde la cual el programa espera leerlo antes de ejecutar el sistema.
 ### Compilar con CMake
