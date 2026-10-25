@@ -60,5 +60,8 @@ bool ColaPacientes::existe(const string &id) {
 }
 
 ColaPacientes::~ColaPacientes() {
-    clear();
+    while(!empty){
+        delete front();
+        pop();
+    }
 }
