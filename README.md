@@ -1,6 +1,8 @@
 # Taller 2 - Estructura de Datos
 ## Descripción
 El proyecto consiste en un sistema de gestión hospitalaria desarrollado en C++. Permite cargar pacientes desde un archivo de texto, procesarlos mediante una cola, clasificarlos utilizando un árbol de decisión y almacenarlos en el árbol AVL correspondiente al servicio médico asignado.
+
+PD: Si aparecen commits de las fechas del taller pasado, no las consideren. Eso sucedio porque al momento de pushear desde el CLion al Github, al estar vinculado el codigo a la anterior repo, aplique algo de --force y eso me arrastro algunos commits. Simplemente, no los consideren.
 ## Servicios médicos
 El sistema considera los siguientes servicios:
 - Urgencias
