@@ -71,4 +71,4 @@ Una vez terminada la compilación, ejecutar el programa generado dentro de la ca
 |---|---|---|---|---|
 | Maximiliano Edhin Abd-El-Kader Góngora | 22.128.215-9 | [@YovngKxder](https://github.com/YovngKxder) | Ingeniería Civil en Computación e Informática | C2 |
 | Fernando Antonio Herrera Castillo | 22.057.550-0 | [@Feersito123](https://github.com/Feersito123) | Ingeniería Civil en Computación e Informática | C1 |
-| Matías Ignacio Gonzáles Gómez | 22.350.340-3 | [@matiasgonzalez15-sys](https://github.com/matiasgonzalez15-sys) | Ingeniería Civil en Computación e Informática | C2 |
+| Matías Ignacio González Gómez | 22.350.340-3 | [@matiasgonzalez15-sys](https://github.com/matiasgonzalez15-sys) | Ingeniería Civil en Computación e Informática | C2 |
