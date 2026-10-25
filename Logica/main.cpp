@@ -18,13 +18,14 @@ void leerPacientes(Hospital* h) {
 
 void menu(Hospital* h) {
     int opcion = 0;
+    string id;
     while (opcion != 4) {
         cout<<"=== HOSPITAL MARMAJA ===" << endl;
         cout<<"1. Atender pacientes"<<endl;
         cout<<"2. Ver departamento"<<endl;
-        cout<<"3. Revisar historial de atencion"<<endl;
+        cout<<"3. Buscar paciente por su ID"<<endl;
         cout<<"4. Salir"<<endl;
-        cout<<"Ingresar opcion: ";
+        cout<<"Ingresar opcion: " << endl;
         cin>>opcion;
         if (cin.fail()) {
             cin.clear();
@@ -33,7 +34,7 @@ void menu(Hospital* h) {
         switch (opcion) {
             case 1:
                 int opcion;
-                h-> mostrarPacientes();
+                
                 cout << "Cuantos pacientes quiere atender: ";
                 cin >> opcion;
                 if (cin.fail()) {
@@ -44,8 +45,11 @@ void menu(Hospital* h) {
                 h->atenderPacientes(opcion);
                 break;
             case 2:
+                cin.ignore(1000, '\n');
+                h->menuAVL();
                 break;
             case 3:
+                h->buscarPaciente(id);
                 break;
             case 4:
                 cout << "Adios... :D" << endl;
