@@ -19,7 +19,7 @@ public:
     ServicioMedico* buscarServicioMedico(const string& nombre);
     void agregarPaciente(Paciente* p);
     bool existePaciente(const string& id);
-    void crearPaciente(string linea);
+    bool crearPaciente(string linea);
     void añadirServicioMedico(ServicioMedico * servicio);
     void crearServicioMedico();
     void verDepartamento();
@@ -27,6 +27,7 @@ public:
 
 
     void menuAVL();
+    void mostrarArbolDecision();
     void buscarPaciente(const string& entrada);
     ServicioMedico* elegirServicio();
 
