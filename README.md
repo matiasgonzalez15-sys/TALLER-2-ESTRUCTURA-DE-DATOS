@@ -72,6 +72,37 @@ cmake -S . -B build
 cmake --build build
 ```
 Una vez terminada la compilación, ejecutar el programa generado dentro de la carpeta `build`. La ubicación del ejecutable depende del sistema operativo y de la configuración de CMake.
+## Funcionamiento del programa
+
+Al iniciar, el programa lee `pacientes.txt` y encola a los pacientes en orden de llegada. Menú principal:
+
+1. **Atender pacientes:** se indica cuántos atender. Por cada uno se retira de la cola, se evalúa en el árbol de decisión, se muestra la ruta seguida y se inserta en el AVL del servicio asignado.
+2. **Ver departamento:** abre una consola con el estado de todos los departamentos, el detalle de un departamento (recorridos inorden, preorden y postorden, altura, factor de balance y forma del árbol), búsqueda de pacientes, eliminación por ID y recorridos del árbol de decisión.
+3. **Buscar paciente:** busca por ID o nombre en los AVL de todos los servicios y muestra la ruta de búsqueda.
+4. **Salir.**
+
+Cada AVL usa el ID como clave y mantiene el balance con rotaciones simples (izquierda y derecha) y dobles (izquierda-derecha y derecha-izquierda).
+
+## Casos de prueba
+
+Con el `pacientes.txt` incluido, la clasificación esperada es:
+
+| ID | Paciente | Servicio |
+|----|----------|----------|
+| 001 | Juan Perez | Medicina General |
+| 002 | Maria Gomez | Pediatría |
+| 003 | Carlos Ruiz | Urgencia |
+| 004 | Ana Torres | Traumatología |
+| 005 | Pedro Soto | Cirugía |
+| 006 | Sofia Morales | Traumatología |
+| 007 | Luis Rojas | Medicina General |
+| 008 | Rosa Diaz | Hospitalización |
+| 009 | Mario Vega | Cardiología |
+| 010 | Elena Paz | Neurología |
+| 011 | Paula Mena | Medicina General |
+| 012 | Jorge Silva | Medicina General |
+
+Los IDs 001, 007, 011 y 012 llegan en orden creciente a Medicina General, lo que obliga al AVL a rotar.
 ## Integrantes
 
 | Nombre completo | RUT | Usuario de GitHub | Carrera | Paralelo |
